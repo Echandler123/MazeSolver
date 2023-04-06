@@ -152,4 +152,12 @@ public class Maze {
         }
         return false;
     }
+
+    public int getNumCols() {
+        return numCols;
+    }
+
+    public int getNumRows() {
+        return numRows;
+    }
 }

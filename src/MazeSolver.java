@@ -29,10 +29,20 @@ public class MazeSolver {
     public ArrayList<MazeCell> getSolution() {
         // TODO: Get the solution from the maze
         Stack<MazeCell> solution = new Stack<MazeCell>();
-        solution.push(maze.getEndCell());
-        solution.push(maze.getEndCell().getParent());
+        MazeCell Current = maze.getEndCell();
+        solution.push(Current);
+        while(!Current.equals(maze.getStartCell()))
+        {
+            solution.push(Current);
+            Current = Current.getParent();
+        }
+        ArrayList<MazeCell> SolutionArray = new ArrayList<MazeCell>();
+        while(solution.size() != 0)
+        {
+            SolutionArray.add(solution.pop());
+        }
         // Should be from start to end cells
-        return null;
+        return SolutionArray;
     }
 
     /**
@@ -42,6 +52,22 @@ public class MazeSolver {
     public ArrayList<MazeCell> solveMazeDFS() {
         // TODO: Use DFS to solve the maze
         // Explore the cells in the order: NORTH, EAST, SOUTH, WEST
+        Stack<MazeCell> SolvedDfs = new Stack<MazeCell>();
+        MazeCell next = maze.getStartCell();
+        SolvedDfs.add(next);
+        int row = next.getRow();
+        int col = next.getCol();
+        while(!next.equals(maze.getEndCell()))
+        {
+
+            if(maze.isValidCell(row,col))
+            {
+                row--;
+                next = maze.getCell(row,col);
+            }
+            else
+
+        }
         return null;
     }
 
