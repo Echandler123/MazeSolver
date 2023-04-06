@@ -3,7 +3,7 @@
  * @author Ms. Namasivayam
  * @version 03/10/2023
  */
-
+import java.util.Stack;
 import java.util.ArrayList;
 
 public class MazeSolver {
@@ -28,6 +28,9 @@ public class MazeSolver {
      */
     public ArrayList<MazeCell> getSolution() {
         // TODO: Get the solution from the maze
+        Stack<MazeCell> solution = new Stack<MazeCell>();
+        solution.push(maze.getEndCell());
+        solution.push(maze.getEndCell().getParent());
         // Should be from start to end cells
         return null;
     }
