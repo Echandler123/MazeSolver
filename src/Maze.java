@@ -147,17 +147,20 @@ public class Maze {
      */
     public boolean isValidCell(int row, int col) {
         // TODO: Complete this function
-        if (mazeGrid[row][col].isWall() == false && mazeGrid[row][col].isExplored() == false) {
-            return true;
+        if(row < 0 || col < 0)
+        {
+            return false;
         }
-        return false;
+        if(row >= numRows || col >= numCols)
+        {
+            return false;
+        }
+        if(mazeGrid[row][col].isWall() == true || mazeGrid[row][col].isExplored() == true)
+        {
+            return false;
+        }
+        return true;
     }
 
-    public int getNumCols() {
-        return numCols;
-    }
 
-    public int getNumRows() {
-        return numRows;
-    }
 }

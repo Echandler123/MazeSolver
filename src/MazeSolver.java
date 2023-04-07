@@ -3,6 +3,8 @@
  * @author Ms. Namasivayam
  * @version 03/10/2023
  */
+import java.util.LinkedList;
+import java.util.Queue;
 import java.util.Stack;
 import java.util.ArrayList;
 
@@ -30,12 +32,12 @@ public class MazeSolver {
         // TODO: Get the solution from the maze
         Stack<MazeCell> solution = new Stack<MazeCell>();
         MazeCell Current = maze.getEndCell();
-        solution.push(Current);
         while(!Current.equals(maze.getStartCell()))
         {
             solution.push(Current);
             Current = Current.getParent();
         }
+        solution.push(maze.getStartCell());
         ArrayList<MazeCell> SolutionArray = new ArrayList<MazeCell>();
         while(solution.size() != 0)
         {
@@ -54,21 +56,29 @@ public class MazeSolver {
         // Explore the cells in the order: NORTH, EAST, SOUTH, WEST
         Stack<MazeCell> SolvedDfs = new Stack<MazeCell>();
         MazeCell next = maze.getStartCell();
-        SolvedDfs.add(next);
-        int row = next.getRow();
-        int col = next.getCol();
-        while(!next.equals(maze.getEndCell()))
-        {
-
-            if(maze.isValidCell(row,col))
-            {
-                row--;
-                next = maze.getCell(row,col);
+        while(!next.equals(maze.getEndCell())) {
+            int row = next.getRow();
+            int col = next.getCol();
+            if (maze.isValidCell(row - 1, col)) {
+                maze.getCell(row - 1, col).isExplored();
+                SolvedDfs.push(maze.getCell(row - 1, col));
             }
-            else
+            if (maze.isValidCell(row, col - 1)) {
+                maze.getCell(row, col - 1).isExplored();
+                SolvedDfs.push(maze.getCell(row, col - 1));
+            }
+            if (maze.isValidCell(row + 1, col)) {
+                maze.getCell(row + 1, col).isExplored();
+                SolvedDfs.push(maze.getCell(row + 1, col));
+            }
+            if (maze.isValidCell(row, col + 1)) {
+                maze.getCell(row, col + 1).isExplored();
+                SolvedDfs.push(maze.getCell(row, col + 1));
+            }
+            next = SolvedDfs.pop();
 
         }
-        return null;
+        return getSolution();
     }
 
     /**
@@ -78,7 +88,36 @@ public class MazeSolver {
     public ArrayList<MazeCell> solveMazeBFS() {
         // TODO: Use BFS to solve the maze
         // Explore the cells in the order: NORTH, EAST, SOUTH, WEST
-        return null;
+        Queue<MazeCell> SolvedBfs = new LinkedList<MazeCell>();
+        MazeCell next = maze.getStartCell();
+        SolvedBfs.add(next);
+        int row = next.getRow();
+        int col = next.getCol();
+        while(!next.equals(maze.getEndCell())) {
+            if (maze.isValidCell(row - 1, col)) {
+                maze.getCell(row - 1, col).isExplored();
+                SolvedBfs.add(maze.getCell(row - 1, col));
+                maze.getCell(row - 1, col).setParent(next);
+            }
+            if (maze.isValidCell(row, col - 1)) {
+                maze.getCell(row, col - 1).isExplored();
+                SolvedBfs.add(maze.getCell(row, col - 1));
+                maze.getCell(row , col - 1).setParent(next);
+            }
+            if (maze.isValidCell(row + 1, col)) {
+                maze.getCell(row + 1, col).isExplored();
+                SolvedBfs.add(maze.getCell(row + 1, col));
+                maze.getCell(row + 1, col).setParent(next);
+            }
+            if (maze.isValidCell(row, col + 1)) {
+                maze.getCell(row, col + 1).isExplored();
+                SolvedBfs.add(maze.getCell(row, col + 1));
+                maze.getCell(row, col + 1).setParent(next);
+            }
+            next = SolvedBfs.remove();
+
+        }
+        return getSolution();
     }
 
     public static void main(String[] args) {
