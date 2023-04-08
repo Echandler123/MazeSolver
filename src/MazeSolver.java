@@ -1,3 +1,4 @@
+//Elijah Chandler 4/7/23
 /**
  * Solves the given maze using DFS or BFS
  * @author Ms. Namasivayam
@@ -60,23 +61,26 @@ public class MazeSolver {
             int row = next.getRow();
             int col = next.getCol();
             if (maze.isValidCell(row - 1, col)) {
-                maze.getCell(row - 1, col).isExplored();
+                maze.getCell(row - 1, col).setExplored(true);
                 SolvedDfs.push(maze.getCell(row - 1, col));
+                maze.getCell(row - 1, col).setParent(next);
             }
             if (maze.isValidCell(row, col - 1)) {
-                maze.getCell(row, col - 1).isExplored();
+                maze.getCell(row, col - 1).setExplored(true);
                 SolvedDfs.push(maze.getCell(row, col - 1));
+                maze.getCell(row, col - 1).setParent(next);
             }
             if (maze.isValidCell(row + 1, col)) {
-                maze.getCell(row + 1, col).isExplored();
+                maze.getCell(row + 1, col).setExplored(true);
                 SolvedDfs.push(maze.getCell(row + 1, col));
+                maze.getCell(row + 1, col).setParent(next);
             }
             if (maze.isValidCell(row, col + 1)) {
-                maze.getCell(row, col + 1).isExplored();
+                maze.getCell(row, col + 1).setExplored(true);
                 SolvedDfs.push(maze.getCell(row, col + 1));
+                maze.getCell(row, col + 1).setParent(next);
             }
             next = SolvedDfs.pop();
-
         }
         return getSolution();
     }
@@ -90,32 +94,30 @@ public class MazeSolver {
         // Explore the cells in the order: NORTH, EAST, SOUTH, WEST
         Queue<MazeCell> SolvedBfs = new LinkedList<MazeCell>();
         MazeCell next = maze.getStartCell();
-        SolvedBfs.add(next);
-        int row = next.getRow();
-        int col = next.getCol();
         while(!next.equals(maze.getEndCell())) {
+            int row = next.getRow();
+            int col = next.getCol();
             if (maze.isValidCell(row - 1, col)) {
-                maze.getCell(row - 1, col).isExplored();
+                maze.getCell(row - 1, col).setExplored(true);
                 SolvedBfs.add(maze.getCell(row - 1, col));
                 maze.getCell(row - 1, col).setParent(next);
             }
             if (maze.isValidCell(row, col - 1)) {
-                maze.getCell(row, col - 1).isExplored();
+                maze.getCell(row, col - 1).setExplored(true);
                 SolvedBfs.add(maze.getCell(row, col - 1));
                 maze.getCell(row , col - 1).setParent(next);
             }
             if (maze.isValidCell(row + 1, col)) {
-                maze.getCell(row + 1, col).isExplored();
+                maze.getCell(row + 1, col).setExplored(true);
                 SolvedBfs.add(maze.getCell(row + 1, col));
                 maze.getCell(row + 1, col).setParent(next);
             }
             if (maze.isValidCell(row, col + 1)) {
-                maze.getCell(row, col + 1).isExplored();
+                maze.getCell(row, col + 1).setExplored(true);
                 SolvedBfs.add(maze.getCell(row, col + 1));
                 maze.getCell(row, col + 1).setParent(next);
             }
             next = SolvedBfs.remove();
-
         }
         return getSolution();
     }

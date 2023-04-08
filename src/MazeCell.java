@@ -1,3 +1,4 @@
+//Elijah Chandler 4/7/23
 /**
  * A class that represents a single cell of the maze.
  * @author Ms. Namasivayam
