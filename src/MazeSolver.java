@@ -29,19 +29,19 @@ public class MazeSolver {
      * the parents to determine the solution
      * @return An arraylist of MazeCells to visit in order
      */
+    /* Adds the cells from the end cell to the beginning cell to a stack then adds those cell to an arraylist in the
+    order start to end */
     public ArrayList<MazeCell> getSolution() {
         // TODO: Get the solution from the maze
         Stack<MazeCell> solution = new Stack<MazeCell>();
         MazeCell Current = maze.getEndCell();
-        while(!Current.equals(maze.getStartCell()))
-        {
+        while(!Current.equals(maze.getStartCell())) {
             solution.push(Current);
             Current = Current.getParent();
         }
         solution.push(maze.getStartCell());
         ArrayList<MazeCell> SolutionArray = new ArrayList<MazeCell>();
-        while(solution.size() != 0)
-        {
+        while(solution.size() != 0) {
             SolutionArray.add(solution.pop());
         }
         // Should be from start to end cells
@@ -52,6 +52,9 @@ public class MazeSolver {
      * Performs a Depth-First Search to solve the Maze
      * @return An ArrayList of MazeCells in order from the start to end cell
      */
+    /* Starting with the beginning cell as the current cell goes through each cell and checks if each of its neighbors
+    are valid cells then adds them to all to a stack then move on to the next cell by using the most last cell in the
+    stack as the new current cell*/
     public ArrayList<MazeCell> solveMazeDFS() {
         // TODO: Use DFS to solve the maze
         // Explore the cells in the order: NORTH, EAST, SOUTH, WEST
@@ -89,6 +92,9 @@ public class MazeSolver {
      * Performs a Breadth-First Search to solve the Maze
      * @return An ArrayList of MazeCells in order from the start to end cell
      */
+    /* Starting with the beginning cell as the current cell goes through each cell and checks if each of its neighbors
+    are valid cells then adds them to all to a queue then move on to the next cell by using the most recent cell in the
+    queue as the new current cell*/
     public ArrayList<MazeCell> solveMazeBFS() {
         // TODO: Use BFS to solve the maze
         // Explore the cells in the order: NORTH, EAST, SOUTH, WEST
