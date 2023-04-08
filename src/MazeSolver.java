@@ -53,8 +53,8 @@ public class MazeSolver {
      * @return An ArrayList of MazeCells in order from the start to end cell
      */
     /* Starting with the beginning cell as the current cell each neighbor of that cell is checked to see if it is a
-    valid cell then if it is, it is added to the stack then moves on to the next cell by using the most last cell in
-    the stack as the new current cell */
+    valid cell then if it is, it is added to the stack then moves on to the next cell by using the most recent cell
+    added to the stack as the new current cell */
     public ArrayList<MazeCell> solveMazeDFS() {
         // TODO: Use DFS to solve the maze
         // Explore the cells in the order: NORTH, EAST, SOUTH, WEST
@@ -93,8 +93,8 @@ public class MazeSolver {
      * @return An ArrayList of MazeCells in order from the start to end cell
      */
     /* Starting with the beginning cell as the current cell each neighbor of that cell is checked to see if it is a
-    valid cell then if it is, it is added to the queue then moves on to the next cell by using the most recent cell in
-    the queue as the new current cell */
+    valid cell then if it is, it is added to the queue then moves on to the next cell by using the first cell to be
+    added to the queue as the new current cell */
     public ArrayList<MazeCell> solveMazeBFS() {
         // TODO: Use BFS to solve the maze
         // Explore the cells in the order: NORTH, EAST, SOUTH, WEST
